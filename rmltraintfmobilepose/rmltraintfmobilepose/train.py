@@ -1,7 +1,7 @@
 import tensorflow as tf
 import numpy as np
 import traceback
-from tensorflow.python.keras.applications.mobilenet_v2 import _inverted_res_block
+# from tensorflow.python.keras.applications.mobilenet_v2 import _inverted_res_block
 import os
 from . import utils
 import cv2
@@ -465,10 +465,10 @@ class KeypointsModel:
         x = tf.keras.layers.BatchNormalization(epsilon=1e-3, momentum=0.999)(x)
         x = tf.keras.layers.ReLU(6.0)(x)
         x = tf.keras.layers.concatenate([x, mobilenet.get_layer("block_12_add").output])
-        x = _inverted_res_block(
+        x = tf.keras.applications.mobilenet_v2._inverted_res_block(
             x, filters=96, alpha=1.0, stride=1, expansion=6, block_id=17
         )
-        x = _inverted_res_block(
+        x = tf.keras.applications.mobilenet_v2._inverted_res_block(
             x, filters=96, alpha=1.0, stride=1, expansion=6, block_id=18
         )
 
